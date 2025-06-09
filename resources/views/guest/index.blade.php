@@ -400,7 +400,7 @@
                         are designed with one clear goal: to maximize returns from the crypto and forex markets for our
                         clients.</p>
                     <div class="flex flex-wrap gap-4 md:gap-6">
-                        <x-link-two href="{{ route('contact') }}">view plans</x-link-two>
+                        <x-link-two href="{{ route('pricing') }}">view plans</x-link-two>
                         <x-link-one href="{{ route('contact') }}">Contact team</x-link-one>
                     </div>
                 </div>
@@ -461,9 +461,7 @@
                                         </div>
                                     @endfor
                                 @endif
-                            </div>
-                            <img src="{{ asset('/images/landing/plan-bottom.avif') }}" alt="Pricing Card Image"
-                                class="w-full h-32 object-fit object-cover">
+                            </div>                            
                         </a>
                     @endforeach
                 @endif
