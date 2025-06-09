@@ -59,9 +59,9 @@
             <x-input-error for="features.*" class="mt-1" />
         </div>
         <div class="w-full mb-4">
-            <x-label for="newFeature" value="{{ __('Add new feature') }}" />
+            <x-label for="newFeature" value="{{ __('Add plan feature') }}" />
             <div class="flex flex-nowrap mb-2">
-                <input type="text" id="newFeature" wire:model="newFeature" placeholder="Enter new feature (optional)"
+                <input type="text" id="newFeature" wire:model="newFeature" placeholder="Enter plan feature..."
                     class="w-7/12 px-4 py-2 rounded-l-lg focus:shadow-primary-outline text-sm leading-5.6 ease appearance-none border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all focus:border-blue-500 focus:ring-0 focus:outline-none">
                 <button type="button" wire:click='addFeature'
                     class="px-7 py-2 rounded-r-lg font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 cursor-pointer text-xs bg-gray-700 hover:shadow-xs active:opacity-85">
