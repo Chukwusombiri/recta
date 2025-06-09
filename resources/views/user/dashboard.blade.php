@@ -55,8 +55,9 @@
                                 <p class="sedan-regular-bold mb-0 text-2xl max-w-[70%]">
                                     Portfolio balance
                                 </p>
-                                
-                                    <div class="mt-2"><x-link-one href="{{ route('user.deposit.pricingTable') }}"
+                                @if (auth()->user()->acRoi > 0 && !auth()->user()->isEarning)
+                                    <div class="mt-2">
+                                        <x-link-one href="{{ route('user.deposit.pricingTable') }}"
                                             class="py-3 flex justify-center gap-2 flex-nowrap">
                                             Re-invest
                                             <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="32"
@@ -66,8 +67,9 @@
                                                 <path d="M17 3v11a3 3 0 0 1 -3 3h-11" />
                                                 <path d="M7 13l-4 4l4 4" />
                                             </svg>
-                                        </x-link-one></div>
-                               
+                                        </x-link-one>
+                                    </div>
+                                @endif                                                                   
                             </div>
                         </div>
                         <div class="px-3 text-right basis-1/3">
