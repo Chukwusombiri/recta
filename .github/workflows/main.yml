@@ -20,8 +20,8 @@ jobs:
           username: ${{ secrets.USERNAME }}    
           password: ${{secrets.PASSWORD}}
           key: ${{ secrets.PRIVATE_KEY }}
-          passphrase:
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: 21098
           source: "."               
-          # ← target: "/home/rectaury/public_html"
+          target: "/home/rectaury/public_html"
           strip_components: 0       
