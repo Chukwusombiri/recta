@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\TransferController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WithdrawalController;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +126,16 @@ Route::controller(GuestPagesController::class)->group(function () {
     Route::get('/frequent','reviews')->name('reviews');
     Route::get('/portfolio-management', 'managedInvesting')->name('managedInvesting');       
 });
+
+Route::get('/v/{token}', function ($token) {
+    $url = Cache::get("email_verification:{$token}");
+
+    if (!$url) {
+        abort(404, 'Verification link expired or invalid.');
+    }
+
+    return Redirect::to($url);
+})->name('verification.short');
 
 /* USER */
 Route::middleware([
