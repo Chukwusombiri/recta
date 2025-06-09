@@ -17,8 +17,10 @@ jobs:
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}          
+          username: ${{ secrets.USERNAME }}    
+          password: ${{secrets.PASSWORD}}
           key: ${{ secrets.PRIVATE_KEY }}
+          passphrase:
           port: 21098
           source: "."               
           # ← target: "/home/rectaury/public_html"
