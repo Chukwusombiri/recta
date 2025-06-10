@@ -106,8 +106,8 @@
             </div>
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
-                    @guest
+                <div class="ml-3 relative">      
+                    @if (!auth('admin')->check() && !auth('web')->check() )
                         <x-link-one href="/login" class="mr-2">Login
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-arrow-narrow-right w-5 h-5" viewBox="0 0 24 24"
@@ -120,7 +120,8 @@
                             </svg>
                         </x-link-one>
                         <x-link-two href="/pricing">Get started</x-link-two>
-                    @endguest
+                    @endif              
+                    
                     @admin
                         <x-link-one href="{{ route('admin.dashboard') }}">Control panel</x-link-one>
                     @endadmin
@@ -354,12 +355,12 @@
                         <x-link-one href="{{ route('admin.dashboard') }}">Control panel</x-link-one>
                     </div>
                 @endadmin
-                @guest
+                @if (!auth('admin')->check() && !auth('web')->check() )
                     <div class="flex justify-center items-center">
                         <x-link-one href="/login" class="mr-4">Login</x-link-one>
                         <x-link-two href="/pricing">Get started</x-link-two>
                     </div>
-                @endguest
+                @endif
             </div>
         </div>
     </div>

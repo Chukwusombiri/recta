@@ -48,7 +48,7 @@ class UserPagesController extends Controller
     }
 
     public function pricingTable(){
-        $plans = \App\Models\Plan::all();
+        $plans = \App\Models\Plan::where('id','!=', auth()->user()->plan_id)->get();
         
         return view('user.pricingTable')->with([
             'plans' => $plans,

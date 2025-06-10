@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //\App\Models\User::factory(10)->create();
-        \App\Models\Admin::factory()->create(['email'=>config('mail.from.address')]);
-        /* \App\Models\Plan::factory(3)->state(new Sequence(
+       // \App\Models\Admin::factory()->create(['email'=>config('mail.from.address')]);
+       /* \App\Models\Plan::factory(3)->state(new Sequence(
             ['name'=>'Core'],
             ['name'=>'Premium'],
             ['name'=>'Generation'],
         ))->create();
-        \App\Models\Wallet::factory(6)->state(new Sequence(
+         \App\Models\Wallet::factory(6)->state(new Sequence(
             ['name'=>'Bitcoin'],
             ['name'=>'Ethereum'],
             ['name'=>'USDT'],

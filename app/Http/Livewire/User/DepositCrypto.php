@@ -15,17 +15,18 @@ class DepositCrypto extends Component
     public $selectedWallet = '';
     public $selectedAddress = '';
     public \App\Models\Plan $plan;
-    public $allWallets;   
+    public $allWallets;
 
-    public function mount($sentPlan){
+    public function mount($sentPlan)
+    {
         $this->plan = $sentPlan;
         $this->allWallets = Wallet::all();
     }
 
     protected $rules = [
-        'amount' => ['required','numeric','integer',],
-        'selectedWallet' => ['required','string','exists:wallets,name'],
-        'selectedAddress' => ['required','string','exists:wallets,address'],
+        'amount' => ['required', 'numeric', 'integer',],
+        'selectedWallet' => ['required', 'string', 'exists:wallets,name'],
+        'selectedAddress' => ['required', 'string', 'exists:wallets,address'],
     ];
 
     protected $validationAttributes = [
@@ -33,46 +34,54 @@ class DepositCrypto extends Component
         'selectedAddress' => 'Funding source details',
     ];
 
-    public function tryValue($value){
-        try {            
-            $wallet = Wallet::findOrFail($value);   
-            if($this->selectedWallet!=='' && $this->selectedWallet===$wallet->name){
-                $this->selectedWallet = '';  
-                $this->selectedAddress = '';
-                return;
+    public function tryValue($value)
+    {
+        try {
+            $wallet = Wallet::findOrFail($value);
+            if ($this->selectedWallet !== '' && $this->selectedWallet === $wallet->name) {
+                $this->selectedWallet = '';
+                $this->selectedAddress = '';                
             }
-            $this->selectedWallet = $wallet->name;  
+            $this->selectedWallet = $wallet->name;
             $this->selectedAddress = $wallet->address;
         } catch (\Throwable $th) {
-            throw $th;
-        }        
+            Log::error($th->getMessage());
+            session()->flash('error', 'Oops! something went wrong, try again later.');
+        }
     }
 
-    public function deposit(){
-        $this->validate(['amount' => ['required','numeric','integer','gte:' . $this->plan->min, 'lte:'.$this->plan->max]]);        
-        try {       
-            $planName = Plan::where('id',$this->plan->id)->first() ? $this->plan->name : null;       
-            if(!$planName){
+    public function deposit()
+    {
+        $this->validate([
+            'amount' => ['required', 'numeric', 'integer', 'gte:' . $this->plan->min, 'lte:' . $this->plan->max],
+            'selectedWallet' => ['required', 'string', 'exists:wallets,name'],
+            'selectedAddress' => ['required', 'string', 'exists:wallets,address'],
+        ]);
+        try {
+            $planName = Plan::where('id', $this->plan->id)->first() ? $this->plan->name : null;
+            $planId = $this->plan->id;
+            if (!$planName) {
                 throw new Exception('unable to find selected investment plan');
-            }        
+            }
             $deposit = new Deposit();
             $deposit->amount = $this->amount;
             $deposit->wallet = $this->selectedWallet;
             $deposit->address = $this->selectedAddress;
             $deposit->user_id = auth()->user()->id;
             $deposit->plan = $planName;
+            $deposit->plan_id = $planId;            
             $deposit->save();
             \App\Events\UserDeposited::dispatch($deposit);
-            session()->put('deposit',[
-                'wallet'=>$deposit->wallet,
-                'amount'=>$deposit->amount,
-                'address'=>$deposit->address,
+            session()->put('deposit', [
+                'wallet' => $deposit->wallet,
+                'amount' => $deposit->amount,
+                'address' => $deposit->address,
             ]);
             return redirect()->route('user.deposit.complete');
         } catch (\Throwable $th) {
             //throw $th;
             Log::error($th->getMessage());
-            session()->flash('error','something went wrong, try again later.');
+            session()->flash('error', 'something went wrong, try again later.');
         }
     }
 

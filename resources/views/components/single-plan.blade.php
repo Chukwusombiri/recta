@@ -47,7 +47,7 @@
             <div class="w-full mt-6 flex items-center justify-center">
                 <a href="{{ route('user.deposit.create', [$currentPlan->id]) }}"
                     class="px-6 py-2 md:px-8 md:py-3 rounded-xl border border-blue-600 hover:border-blue-500 text-blue-600 hover:text-blue-500">
-                    {{ ($currentPlan->id !== auth()->user()->plan_id) ? 'upgrade' : 'deposit' }}
+                    {{ (auth()->user()->plan_id && $currentPlan->id !== auth()->user()->plan_id) ? 'upgrade' : 'deposit' }}
                 </a>
             </div>
         </div>
