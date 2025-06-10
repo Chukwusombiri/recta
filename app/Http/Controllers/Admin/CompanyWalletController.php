@@ -30,8 +30,7 @@ class CompanyWalletController extends Controller
 
         $wallet = new Wallet();
         $wallet->name = $request->name;
-        $wallet->address = $request->address; 
-        $wallet->icon_path = 'wallets/'.$request->name.'jpg';     
+        $wallet->address = $request->address;         
         $wallet->save();
 
         return redirect()->back()->with('success', 'New Company wallet record was successfully created');
