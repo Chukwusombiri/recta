@@ -54,7 +54,7 @@
             </x-secondary-button>
         </div>
         <div class="flex justify-center mt-4">            
-            <button wire:click="redirectToDestination" href="{{route('user.get.contact')}}" class="inline-flex gap-2 flex-nowrap hover:underline outline-none border-0 text-blue-500 hover:text-blue-600 cursor-pointer text-base futura-medium tracking-wide"><span>I'll fill later, skip now!</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
+            <button wire:click="redirectToDestination" class="inline-flex gap-2 flex-nowrap hover:underline outline-none border-0 text-blue-500 hover:text-blue-600 cursor-pointer text-base futura-medium tracking-wide"><span>I'll fill later, skip now!</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
                 <path d="M5 12l14 0"></path>
                 <path d="M15 16l4 -4"></path>
                 <path d="M15 8l4 4"></path>

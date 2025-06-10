@@ -79,7 +79,7 @@ class SaveContact extends Component
             return Redirect::to($intendedRoute);
         }
         Session::put('accountUpdated',true);            
-        return redirect()->route('user.allSet');
+        return redirect()->route('user.dashboard');
     }
 
     public function render()
